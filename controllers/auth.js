@@ -1,8 +1,9 @@
 const crypto = require("crypto");
 const User = require("../models/User");
 const errorResponse = require("../utils/errorResponse");
-const sendEmail = require("../utils/sendEmail");
+const sendEmail = require("../services/sendEmail");
 const getEmailText = require("../utils/emailText");
+
 // handle routes
 exports.register = async (req, res, next) => {
   const { username, password, email } = req.body;
@@ -45,7 +46,7 @@ exports.forgotPassword = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      next(new errorResponse("Email could not be sent", 404));
+      return next(new errorResponse("Email could not be sent", 404));
     }
 
     const resetToken = user.getResetPasswordToken();
@@ -83,7 +84,7 @@ exports.resetPassword = async (req, res, next) => {
   console.log(" ");
   console.log(req.params.resetToken);
 
-  try {
+  try {         
     const user = await User.findOne({
       resetPasswordToken: resetPasswordToken,
       resentPasswordExpire: { $gt: Date.now() },
@@ -107,5 +108,6 @@ exports.resetPassword = async (req, res, next) => {
 
 function sendToken(user, statusCode, res) {
   const token = user.getSignedToken();
-  return res.status(statusCode).json({ success: true, token });
+  console.log(token);
+  return res.status(statusCode).json({ success: true, token: token });
 }
