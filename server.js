@@ -22,6 +22,13 @@ app.use("/api/private", require("./routes/private"));
 // error handler
 app.use(customErrorHandler);
 
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+  app.get("*", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+}
+
 // server setup
 const PORT = process.env.PORT || 5000;
 
