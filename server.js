@@ -12,9 +12,6 @@ app.use(express.json());
 connectDB();
 
 // routes
-app.get("/", (req, res, next) => {
-  res.send("home");
-});
 
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
