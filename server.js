@@ -30,7 +30,7 @@ if (process.env.NODE_ENV == "production") {
 }
 
 // server setup
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 const server = app.listen(PORT, () => {
   console.log(`connected at ${PORT}`);
