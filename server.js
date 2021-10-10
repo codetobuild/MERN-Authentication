@@ -16,7 +16,7 @@ connectDB();
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
 
-// error handler
+// error handle
 app.use(customErrorHandler);
 
 if (process.env.NODE_ENV == "production") {
