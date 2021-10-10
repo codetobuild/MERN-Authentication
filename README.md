@@ -6,6 +6,9 @@
 
 - JWT was used for authorization. Allowing only the authorized user to access routes, services, and resources with a valid token.
 
+# Project Demo
+
+[Click here to view project on live](https://mern-authentication-nokha.herokuapp.com/)
 
 # Installation
 
